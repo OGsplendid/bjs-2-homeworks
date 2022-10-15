@@ -14,8 +14,6 @@ function solveEquation(a, b, c) {
   return arr; // array
 }
 
-solveEquation (1, 2, 3);
-
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
   let totalAmount;
