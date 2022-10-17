@@ -16,16 +16,27 @@ function solveEquation(a, b, c) {
 
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
-	
-  let totalAmount;
-  let mainDebt = amount - contribution;
-  let currentMonth = new Date().getMonth();
-  let currentYear = new Date().getFullYear();
-  let yearDiff = date.getFullYear() - currentYear;
-  let termInMonths = yearDiff * 12 - currentMonth + date.getMonth();
-  let monthlyPay = mainDebt * (percent/1200 + (percent/1200 / (((1 + percent/1200)**termInMonths) - 1)));
-  totalAmount = +(monthlyPay * termInMonths).toFixed(2);
-  console.log(totalAmount);
+	if (isNaN(percent) === true) {
+		+percent;
+		console.log(`Параметр "Процентная ставка" содержит неправильное значение ${percent}`)
+	}
+	if (isNaN(contribution) === true) {
+		+contribution;
+		console.log(`Параметр "Начальный взнос" содержит неправильное значение ${contribution}`)
+	}
+	if (isNaN(amount) === true) {
+		+amount;
+		console.log(`Параметр "Общая стоимость" содержит неправильное значение ${amount}`)
+	}
+  	let totalAmount;
+  	let mainDebt = amount - contribution;
+  	let currentMonth = new Date().getMonth();
+  	let currentYear = new Date().getFullYear();
+  	let yearDiff = date.getFullYear() - currentYear;
+  	let termInMonths = yearDiff * 12 - currentMonth + date.getMonth();
+  	let monthlyPay = mainDebt * (percent/1200 + (percent/1200 / (((1 + percent/1200)**termInMonths) - 1)));
+  	totalAmount = +(monthlyPay * termInMonths).toFixed(2);
+  	console.log(totalAmount);
 
-  return totalAmount;
+  	return totalAmount;
 }
