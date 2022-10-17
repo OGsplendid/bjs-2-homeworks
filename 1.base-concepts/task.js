@@ -16,9 +16,16 @@ function solveEquation(a, b, c) {
 
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
+	
   let totalAmount;
   let mainDebt = amount - contribution;
-  let creditTerm = 
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
+  let yearDiff = date.getFullYear() - currentYear;
+  let termInMonths = yearDiff * 12 - currentMonth + date.getMonth();
+  let monthlyPay = mainDebt * (percent/1200 + (percent/1200 / (((1 + percent/1200)**termInMonths) - 1)));
+  totalAmount = (monthlyPay * termInMonths).toFixed(2);
+  console.log(totalAmount);
 
   return totalAmount;
 }
