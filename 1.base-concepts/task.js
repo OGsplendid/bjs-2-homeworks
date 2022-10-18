@@ -17,13 +17,13 @@ function solveEquation(a, b, c) {
 
 function calculateTotalMortgage(percent, contribution, amount, date) {
 	if (isNaN(+percent) === true) {
-		console.log(`Параметр /"Процентная ставка/" содержит неправильное значение ${percent}`);
+		return (`Параметр /"Процентная ставка/" содержит неправильное значение ${percent}`);
 	}
 	if (isNaN(+contribution) === true) {
-		console.log(`Параметр "Начальный взнос" содержит неправильное значение ${contribution}`);
+		return (`Параметр "Начальный взнос" содержит неправильное значение ${contribution}`);
 	}
 	if (isNaN(+amount) === true) {
-		console.log(`Параметр "Общая стоимость" содержит неправильное значение ${amount}`);
+		return (`Параметр "Общая стоимость" содержит неправильное значение ${amount}`);
 	}
   	let totalAmount;
   	let mainDebt = amount - contribution;
