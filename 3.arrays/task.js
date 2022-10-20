@@ -1,9 +1,6 @@
 function compareArrays(arr1, arr2) {
-  let result;
-
-  // Ваш код
-
-  return result; // boolean
+	let result = arr1.every((element, indexOfElement) => element === arr2[indexOfElement]);
+		return result;
 }
 
 function advancedFilter(arr) {
