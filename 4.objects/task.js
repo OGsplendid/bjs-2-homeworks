@@ -27,23 +27,25 @@ Student.prototype.addMark = function(mark) {
 Student.prototype.addMarks = function(...someMarks) {
 	if (this.marks === undefined) {
 		this.marks = [];
-		this.marks.push(someMarks);
+		this.marks.push(...someMarks);
+		// this.marks.splice(0, 0, ...someMarks);
 	} else {
-		this.marks.push(someMarks);
+		this.marks.push(...someMarks);
+		// this.marks.splice(0, 0, ...someMarks);
 	}
 }
 
 Student.prototype.getAverage = function() {
-	let avg;
 	let sum;
 	if (this.marks === undefined) {
 		return false;
 	} else {
-		this.marks.reduce((acc, mark) => {
-			sum = acc += mark;
+		sum = this.marks.reduce((acc, mark) => {
+			acc += mark;
+			return acc;
 		}, 0);
 	}
-	avg = sum / this.marks.length;
+	return sum / this.marks.length;
 }
 
 Student.prototype.exclude = function(reason) {
