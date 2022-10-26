@@ -436,3 +436,56 @@ play([
 	new Warrior(getPosition(), 'Рыцарь Денис'),
 	new Mage(getPosition(), 'Маг Екатерина'),
 ]);*/
+
+
+const weapons = [
+	new Knife('Нож', 5, 300, 1),
+	new Staff('Посох', 8, 300, 2),
+	new Axe('Секира', 27, 800, 1),
+	new StormStaff('Посох Бури', 10, 300, 3),
+	new LongBow('Длинный лук', 15, 200, 4),
+	new Bow('Лук', 10, 200, 3)
+];
+
+function getNames(arr) {
+	arr.forEach(item => {
+		console.log(item.name);
+	})
+}
+
+function getCountReliableWeapons(requiredDurability, arr) {
+	let sum = 0;
+	arr.forEach(item => {
+		if (item.durability > requiredDurability) {
+			sum++;
+		}
+	})
+	return sum;
+}
+
+function hasReliableWeapons(requiredDurability, arr) {
+	arr.some(item => {
+		if (item.durability > requiredDurability) {
+			return true;
+		} else {
+			return false;
+		}
+	});
+}
+
+function getReliableWeaponsNames(requiredDurability, arr) {
+	arr.forEach(item => {
+		if (item.durability > requiredDurability) {
+			console.log(item.name);
+		}
+	})
+}
+
+function getTotalDamage(arr) {
+	let result;
+	result = arr.reduce((acc, item) => {
+		acc += item.durability;
+		return acc;
+	}, 0);
+	return result;
+}
