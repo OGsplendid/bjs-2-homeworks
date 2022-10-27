@@ -86,7 +86,9 @@ class Library {
 					return null;
 				}
 			}
+			return null;
 		}
+		return null;
 	}
 
 	giveBookByName(bookName) {
@@ -99,51 +101,68 @@ class Student {
 		this.name = name;
     	this.gender = gender;
     	this.age = age;
+    	this.marks = {};
 	}
 
 	addMark(mark, subjectName) {
-		let name;
-		let marks = [];
 		if (mark > 5 || mark < 1) {
 			console.log("Ошибка, оценка должна быть числом от 1 до 5");
-		} else if (this.subject === undefined) {
-			this.subject = [];
-			this.subject.push({name: subjectName, marks});
-			this.subject[0].marks.push(mark);
-		}
-
-		for (let i = 0; i < this.subject.length; i++) {
-			if (this.subject[i].name === subjectName && this.subject !== undefined) {
-				this.subject[i].marks.push(mark);
-			} else if (this.subject[i].name !== subjectName && this.subject !== undefined) {
-				this.subject.push({name: subjectName, marks});
-				this.subject[i].marks.push(mark);
-			}
+		} else if (this.marks[subjectName] === undefined) {
+			this.marks[subjectName] = [];
+			this.marks[subjectName].push(mark);
+		} else {
+			this.marks[subjectName].push(mark);
 		}
 	}
 
-	// getAverageBySubject(subjectName) {
-	// 	let sum;
-	// 	for (let i = 0; i < this.subject.length; i++) {
-	// 		if (this.subject[i].name === subjectName) {
-	// 			sum = this.subject[i].marks.reduce((acc, mark) => {
-	// 			acc += mark;
-	// 			return acc;
-	// 			}, 0);
-	// 		} else {
-	// 			return false;
-	// 		}
-	// 	return sum / this.subject[i].marks.length;
-	// 	}
-	// }
+	getAverageBySubject(subjectName) {
+		let sum;
+		let avg;
+		if (this.marks[subjectName] !== undefined) {
+			sum = this.marks[subjectName].reduce((acc, mark) => {
+				acc += mark;
+				return acc;
+			}, 0);
+			avg = sum / this.marks[subjectName].length;
+			console.log(`Средний балл по предмету geometry ${avg}`);
+		} else {
+			console.log('Несуществующий предмет');
+		}
+	}
 
-	// getAverage() {
-	// 	let sum;
-	// 	for (let i = 0; i < this.subject.length; i++) {
-	// 		sum = this.subject[i].marks.reduce((acc, mark) => {
-	// 			acc += mark;
-	// 			return acc;
-	// 			}, 0);
-	// 	}
-	// }
+	getAverage() {
+		let sum;
+		let avg;
+		for (subject in this.marks) {
+			if (this.marks[subject] !== undefined) {
+				sum = this.marks[subject].reduce((acc, mark) => {
+				acc += mark;
+				return acc;
+			}, 0);
+			avg = sum / this.marks[subjectName].length;
+			console.log(`Средний балл по предмету geometry ${avg}`);
+			} else {
+				console.log('Оценки отсутствуют');
+			}
+		}
+
+		// let max = 0;
+		// for (let subject in this.marks) {
+		// 	if (this.marks[subject].length > max) {
+		// 		max = this.marks[subject].length;
+		// 	} else {
+		// 		console.log('Оценки отсутствуют');
+		// 	}
+		// 	return max;
+		// }
+
+		// for (let i = 0; i < this.marks.length; i++) {
+		// 	if ()
+		// }
+		// for (let subject in this.marks) {
+		// 	for (let i = 0; i < this.marks.length; i++) {
+
+		// 	}
+		// }
+	}
 }
