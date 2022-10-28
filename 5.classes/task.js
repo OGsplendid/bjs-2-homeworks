@@ -131,38 +131,20 @@ class Student {
 	}
 
 	getAverage() {
-		let sum;
+		let sum = 0;
+		let count = 0;
+		let max = 0;
 		let avg;
-		for (subject in this.marks) {
-			if (this.marks[subject] !== undefined) {
-				sum = this.marks[subject].reduce((acc, mark) => {
-				acc += mark;
-				return acc;
-			}, 0);
-			avg = sum / this.marks[subjectName].length;
-			console.log(`Средний балл по предмету geometry ${avg}`);
-			} else {
-				console.log('Оценки отсутствуют');
+		for (let subject in this.marks) {
+			if (this.marks[subject].length > max) {
+				max = this.marks[subject].length;
+			}
+			for (let i = 0; i < max; i++) {
+				count++;
+				sum += this.marks[subject][i];
 			}
 		}
-
-		// let max = 0;
-		// for (let subject in this.marks) {
-		// 	if (this.marks[subject].length > max) {
-		// 		max = this.marks[subject].length;
-		// 	} else {
-		// 		console.log('Оценки отсутствуют');
-		// 	}
-		// 	return max;
-		// }
-
-		// for (let i = 0; i < this.marks.length; i++) {
-		// 	if ()
-		// }
-		// for (let subject in this.marks) {
-		// 	for (let i = 0; i < this.marks.length; i++) {
-
-		// 	}
-		// }
+		avg = sum / count;
+		return avg;
 	}
 }
