@@ -2,7 +2,7 @@ function parseCount(value) {
 	let result = Number.parseInt(value);
 	if (isNaN(result) === true) {
 		throw new Error('Невалидное значение');
-	}
+	} 
 	return result;
 }
 
@@ -40,6 +40,9 @@ function getTriangle(a, b, c) {
 	try {
 		return new Triangle(a, b, c);
 	} catch(error) {
-		return 'Ошибка! Треугольник не существует';
+		let notTriangle = {};
+		notTriangle.getPerimeter = () => 'Ошибка! Треугольник не существует';
+		notTriangle.getArea = () => 'Ошибка! Треугольник не существует';
+		return notTriangle;
 	}
 }
