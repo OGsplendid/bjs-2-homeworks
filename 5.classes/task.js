@@ -87,7 +87,6 @@ class Library {
 	}
 
 	giveBookByName(bookName) {
-		this.books.find(element => element.name === bookName);
 		for (let i = 0; i < this.books.length; i++) {
 			if (this.books[i].name === bookName) {
 				let givenBook = this.books[i];
