@@ -79,24 +79,23 @@ class Library {
 
 	findBookBy(type, value) {
 		for (let i = 0; i < this.books.length; i++) {
-			for (let prop in this.books[i]) {
-				if (prop === type && this.books[i][prop] === value) {
+				if (this.books[i][type] === value) {
 					return this.books[i];
-				} else {
-					return null;
 				}
-			}
-			return null;
 		}
 		return null;
 	}
 
 	giveBookByName(bookName) {
+		this.books.find(element => element.name === bookName);
 		for (let i = 0; i < this.books.length; i++) {
 			if (this.books[i].name === bookName) {
+				let givenBook = this.books[i];
 				this.books.splice(i, 1);
+				return givenBook;
 			}
 		}
+		return null;
 	}
 }
 
@@ -129,27 +128,26 @@ class Student {
 				return acc;
 			}, 0);
 			avg = sum / this.marks[subjectName].length;
-			console.log(`Средний балл по предмету geometry ${avg}`);
-		} else {
-			console.log('Несуществующий предмет');
+			return avg;
 		}
+		return null;
 	}
 
 	getAverage() {
-		let sum = 0;
-		let count = 0;
-		let max = 0;
+		let allMarks = [];
+		let sum;
 		let avg;
 		for (let subject in this.marks) {
-			if (this.marks[subject].length > max) {
-				max = this.marks[subject].length;
-			}
-			for (let i = 0; i < max; i++) {
-				count++;
-				sum += this.marks[subject][i];
-			}
+			allMarks.push(this.marks[subject]);
 		}
-		avg = sum / count;
-		return avg;
+		let total = allMarks.flat();
+		sum = total.reduce((acc, mark) => {
+			acc += mark;
+			return acc;
+		}, 0);
+		console.log(sum);
+		console.log(total.length);
+		avg = sum / total.length;
+		return +avg.toFixed(2);
 	}
 }
