@@ -145,8 +145,6 @@ class Student {
 			acc += mark;
 			return acc;
 		}, 0);
-		console.log(sum);
-		console.log(total.length);
 		avg = sum / total.length;
 		return +avg.toFixed(2);
 	}
