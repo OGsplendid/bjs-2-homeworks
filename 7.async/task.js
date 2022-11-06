@@ -30,16 +30,24 @@ class AlarmClock {
 		if (this.timerId) {
 			return;
 		}
-		let checkClock = (ring => {
-			let currentTime = this.getCurrentFormattedTime();
-			if (ring.time === currentTime) {
-				ring.callback();
-			}
-		});
+		// let checkClock = (ring => {
+		// 	if (ring.time === this.getCurrentFormattedTime()) {
+		// 		ring.callback();
+		// 	}
+		// });
 
-		this.alarmCollection.forEach(element => {
-			setInterval(checkClock, 1000)
-		});
+// ОТПРАВИЛ ЗАДАНИЕ ВАМ НА ПРОВЕРКУ, ПОСЛЕ ЭТОГО ТОЛЬКО ПОСМОТРЕЛ ВИДЕО. НА НЕКОТОРЫЕ ВОПРОСЫ ОТВЕТ НАШЁЛ. ТОЛЬКО ВОТ
+// ЧТО НЕ ПОНЯТНО. ЕСЛИ СТРЕЛОЧНАЯ ФУНКЦИЯ НЕ ИМЕЕТ КОНТЕКСТА, ПОЧЕМУ МЫ СМОГЛИ СОСЛАТЬСЯ НА THIS?
+// ВООБЩЕ ВАРИАНТ БЕЗ ВСПОМОГАТЕЛЬНОЙ ФУНКЦИИ ВЫГЛЯДИТ ЛУЧШЕ И ПРОЩЕ.
+
+		let timerId = setInterval(() => {
+			this.alarmCollection.forEach(alarm => {
+				let aimTime = this.getCurrentFormattedTime();
+				if (alarm.time === aimTime) {
+					alarm.callback();
+				}
+			})
+		}, 1000);
 	}
 
 	stop() {
