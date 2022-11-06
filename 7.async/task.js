@@ -27,23 +27,23 @@ class AlarmClock {
 	}
 
 	start() {
-		if (this.timerId !== null) {
+		if (this.timerId) {
 			return;
 		}
-		let currentTime = this.getCurrentFormattedTime();
 		let checkClock = (ring => {
+			let currentTime = this.getCurrentFormattedTime();
 			if (ring.time === currentTime) {
-				return ring.callback;
+				ring.callback();
 			}
 		});
 
-		this.timerId = this.alarmCollection.forEach(element => {
-			setInterval(boundFunc, 1000)
+		this.alarmCollection.forEach(element => {
+			setInterval(checkClock, 1000)
 		});
 	}
 
 	stop() {
-		if (this.timerId !== null) {
+		if (this.timerId) {
 			clearInterval(this.timerId);
 			this.timerId = null;
 		}
