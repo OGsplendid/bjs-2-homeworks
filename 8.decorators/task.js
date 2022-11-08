@@ -2,10 +2,6 @@ function cachingDecoratorNew(func) {
   let cache = [];
   function wrapper(...args) {
   	let hash = args.join(',');
-  	// let transitArr = [];
-  	// transitArr.push(hash);
-  	// transitArr.sort();
-  	// hash = transitArr.toString;
   	let alreadySearched = cache.find(el => el.hash === hash);
   	if (alreadySearched) {
   		console.log("Из кэша: " + alreadySearched.value);
@@ -26,22 +22,21 @@ function cachingDecoratorNew(func) {
 
 
 function debounceDecoratorNew(func, delay) {
-	let timeoutId = 'first call';
+	let timeoutId = null;
+	wrapper.count = 0;
+	wrapper.allCount = 0;
 	function wrapper(...args) {
-		let allCount = 0;
-		allCount++;
-		let count = 0;
-		if (timeoutId === 'first call') {
-			return func(...args);
-			timeoutId = null;
+		wrapper.allCount++;
+
+		if (timeoutId === null) {
+			wrapper.count++;
+			func(...args);
 		}
-		if (timeoutId) {
-			clearTimout(timeoutId);
-		}
+
+		clearTimout(timeoutId);
 		timoutId = setTimout(() => {
-			timeoutId = null;
-			count++;
-			return func(...args)
+			wrapper.count++;
+			func(...args)
 		}, delay);
 	}
 	return wrapper;
