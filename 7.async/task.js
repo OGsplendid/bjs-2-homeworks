@@ -35,12 +35,7 @@ class AlarmClock {
 		// 		ring.callback();
 		// 	}
 		// });
-
-// ОТПРАВИЛ ЗАДАНИЕ ВАМ НА ПРОВЕРКУ, ПОСЛЕ ЭТОГО ТОЛЬКО ПОСМОТРЕЛ ВИДЕО. НА НЕКОТОРЫЕ ВОПРОСЫ ОТВЕТ НАШЁЛ. ТОЛЬКО ВОТ
-// ЧТО НЕ ПОНЯТНО. ЕСЛИ СТРЕЛОЧНАЯ ФУНКЦИЯ НЕ ИМЕЕТ КОНТЕКСТА, ПОЧЕМУ МЫ СМОГЛИ СОСЛАТЬСЯ НА THIS?
-// ВООБЩЕ ВАРИАНТ БЕЗ ВСПОМОГАТЕЛЬНОЙ ФУНКЦИИ ВЫГЛЯДИТ ЛУЧШЕ И ПРОЩЕ.
-
-		let timerId = setInterval(() => {
+		this.timerId = setInterval(() => {
 			this.alarmCollection.forEach(alarm => {
 				let aimTime = this.getCurrentFormattedTime();
 				if (alarm.time === aimTime) {
@@ -70,19 +65,18 @@ class AlarmClock {
 
 function testCase() {
 	let phoneAlarm = new AlarmClock();
-	phoneAlarm.addClock('13:49', () => console.log('Пора вставать'), 1);
+	phoneAlarm.addClock('09:39', () => console.log('Пора вставать'), 1);
 	
-	phoneAlarm.addClock('13:50', () => {
+	phoneAlarm.addClock('09:40', () => {
 		 console.log('Давай, вставай уже!');
 		 phoneAlarm.removeClock(2)
 	}, 2);
 	
-	phoneAlarm.addClock('13:51', () => {
+	phoneAlarm.addClock('09:41', () => {
 		console.log('Вставай, а то проспишь!');
-		stop();
-		clearAlarms();
-		printAlarms();
+		 phoneAlarm.clearAlarms();
+		 phoneAlarm.printAlarms();
 	}, 3);
-	phoneAlarm.start();
 	phoneAlarm.printAlarms();
+	phoneAlarm.start();
 }
